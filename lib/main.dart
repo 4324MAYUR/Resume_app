@@ -14,6 +14,7 @@ class Myapp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: Allroutes.Screen_Page,
       routes: Allroutes.routes,
     );
   }
