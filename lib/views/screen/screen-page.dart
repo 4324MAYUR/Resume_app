@@ -8,17 +8,17 @@ class screen_page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 5),
           () {
         Navigator.of(context).pushReplacementNamed(Allroutes.homepage);
       },
     );
     return const Scaffold(
       body: Padding(
-        padding: EdgeInsets.all(18),
+        padding: EdgeInsets.all(88),
         child: Center(
           child: kIsWeb
-          ? Image(image: NetworkImage('https://storyset.com/illustration/profiling/amico#default&hide=Boxes&hide=complete'),)
+          ? Image(image: NetworkImage('lib/assets/icons/gif/start_screen.gif'),)
           : Image(image: AssetImage('lib/assets/icons/gif/start_screen.gif'),),
         ),
       ),

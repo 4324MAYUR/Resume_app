@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class Build_option_page extends StatefulWidget {
   const Build_option_page({super.key});
 
@@ -12,7 +11,23 @@ class _Build_option_pageState extends State<Build_option_page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Build Option"),
+        backgroundColor: Colors.blue,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.popAndPushNamed(context, 'Home_Page');
+          },
+          icon: const Icon(Icons.arrow_back_rounded),
+        ),
+        automaticallyImplyLeading: false,
+        title:  const Center(
+          child: Text("Build Option",
+            style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 26,
+          ),
+          ),
+        ),
       ),
     );
   }

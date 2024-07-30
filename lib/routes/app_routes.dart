@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:resume_app/views/Home_page/Home_Page.dart';
 import 'package:resume_app/views/build_option_page/Build_Option_Page.dart';
 import 'package:resume_app/views/screen/screen-page.dart';
-
-
 class Allroutes
 {
   static String homepage = "/";
@@ -11,7 +9,6 @@ class Allroutes
   static String Screen_Page = "screen_page";
 
   static String iconpath = "lib/assets/icons/";
-
 
   static List<Map<String,dynamic>> AllOption = [
     {
@@ -76,7 +73,7 @@ class Allroutes
   {
     homepage : (context) => const Home_Page(),
     build_option_page : (context) => const Build_option_page(),
-    Screen_Page : (context) =>  screen_page(),
+    Screen_Page : (context) =>  const screen_page(),
 
   };
 }
