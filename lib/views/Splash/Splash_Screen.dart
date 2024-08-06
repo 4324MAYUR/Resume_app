@@ -2,17 +2,27 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:resume_app/routes/app_routes.dart';
 
-class screen_page extends StatelessWidget {
-  const screen_page({super.key});
+class Splash_Page extends StatelessWidget {
+  const Splash_Page({super.key});
 
   @override
   Widget build(BuildContext context) {
+
     Future.delayed(
-      const Duration(seconds: 5),
+      const Duration(seconds: 3),
           () {
         Navigator.of(context).pushReplacementNamed(Allroutes.homepage);
       },
     );
+
+    // Timer.periodic(
+    //     Duration(seconds: 5),
+    //     (timer) {
+    //       Navigator.of(context).pushReplacementNamed(Allroutes.homepage);
+    //      timer.cancel();
+    //     }
+    // );
+
     return const Scaffold(
       body: Padding(
         padding: EdgeInsets.all(88),

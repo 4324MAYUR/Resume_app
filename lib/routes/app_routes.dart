@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:resume_app/views/Home_page/Home_Page.dart';
 import 'package:resume_app/views/build_option_page/Build_Option_Page.dart';
-import 'package:resume_app/views/screen/screen-page.dart';
+import 'package:resume_app/views/Splash/Splash_Screen.dart';
 class Allroutes
 {
   static String homepage = "/";
   static String build_option_page = "Build_option_page";
-  static String Screen_Page = "screen_page";
+  static String screen_page = "screen_page";
 
   static String iconpath = "lib/assets/icons/";
 
@@ -73,7 +73,7 @@ class Allroutes
   {
     homepage : (context) => const Home_Page(),
     build_option_page : (context) => const Build_option_page(),
-    Screen_Page : (context) =>  const screen_page(),
+    screen_page : (context) =>  const Splash_Page(),
 
   };
 }

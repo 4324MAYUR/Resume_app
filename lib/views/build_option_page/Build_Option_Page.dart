@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:resume_app/routes/app_routes.dart';
 class Build_option_page extends StatefulWidget {
   const Build_option_page({super.key});
 
@@ -7,6 +9,15 @@ class Build_option_page extends StatefulWidget {
 }
 
 class _Build_option_pageState extends State<Build_option_page> {
+  @override
+  void dispose()
+  {
+    SystemChrome.setSystemUIOverlayStyle(
+      const SystemUiOverlayStyle(
+          statusBarColor: Colors.red),
+    );
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +39,22 @@ class _Build_option_pageState extends State<Build_option_page> {
           ),
           ),
         ),
+      ),
+      body: Column(
+        children: Allroutes.AllOption.map(
+          (e) => ListTile(
+            leading: Image.asset(e['icon'],
+            height: 44,
+            ),
+            title: Text(e['title']),
+            trailing: IconButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed(e['route']);
+              },
+              icon: const Icon(Icons.add),
+            ),
+          ),
+        ).toList(),
       ),
     );
   }
