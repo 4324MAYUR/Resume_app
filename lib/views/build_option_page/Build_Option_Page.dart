@@ -14,28 +14,32 @@ class _Build_option_pageState extends State<Build_option_page> {
   {
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-          statusBarColor: Colors.red),
+          statusBarColor: Colors.black),
     );
     super.dispose();
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.black,
         leading: IconButton(
           onPressed: () {
-            Navigator.popAndPushNamed(context, 'Home_Page');
+            Navigator.pop(context, 'Home_Page');
           },
-          icon: const Icon(Icons.arrow_back_rounded),
+          icon: const Icon(Icons.arrow_back_rounded,
+          color: Colors.white,
+          ),
         ),
         automaticallyImplyLeading: false,
         title:  const Center(
           child: Text("Build Option",
             style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 26,
+            fontSize: 24,
           ),
           ),
         ),
@@ -43,15 +47,22 @@ class _Build_option_pageState extends State<Build_option_page> {
       body: Column(
         children: Allroutes.AllOption.map(
           (e) => ListTile(
-            leading: Image.asset(e['icon'],
-            height: 44,
+            leading: Image.asset(e['icon'],color: Colors.white,
+            height: 30
             ),
-            title: Text(e['title']),
+            title: Text(e['title'],
+            style: const TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+            ),
             trailing: IconButton(
               onPressed: () {
                 Navigator.of(context).pushNamed(e['route']);
               },
-              icon: const Icon(Icons.add),
+              icon: const Icon(Icons.add,
+              color: Colors.white,
+              ),
             ),
           ),
         ).toList(),

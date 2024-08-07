@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:resume_app/routes/app_routes.dart';
-import 'package:resume_app/views/Splash/Splash_Screen.dart';
 void main()
 {
   WidgetsFlutterBinding.ensureInitialized();
 
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
-      statusBarColor: Colors.black45,
+      statusBarColor: Colors.black,
     ),
   );
 

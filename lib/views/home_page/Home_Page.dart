@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:resume_app/routes/app_routes.dart';
 
 class Home_Page extends StatefulWidget {
@@ -14,14 +13,15 @@ class _Home_PageState extends State<Home_Page> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.black,
         title: const Center(
           child:  Text("Home Page",
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
             fontWeight: FontWeight.bold,
-            fontSize: 26,
+            fontSize: 24,
           ),
           ),
         ),
