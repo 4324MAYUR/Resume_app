@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:resume_app/globals.dart';
 import 'package:resume_app/utils/extension.dart';
 
 class Contact_Info_Page extends StatefulWidget {
@@ -14,7 +15,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
   int index = 0;
   bool hide = true;
 
-  String? name , contact , email , password ,address;
+  String? name , contact , email , password ,address , city;
   // Formkey
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -24,6 +25,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController addressController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
 
   void setIndex(int i) {
     setState(() {
@@ -142,6 +144,10 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                       {
                                         return "Please Enter Name";
                                       }
+                                      else if (val.isNotEmpty) {
+                                        globals.name = val;
+                                        return null ;
+                                    }
                                       else{
                                         return null;
                                     }
@@ -173,6 +179,11 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     if (val!.isEmpty)
                                       {
                                         return "Please Enter number ";
+                                      }
+                                    else if(val.isNotEmpty)
+                                      {
+                                        globals.contact =val;
+                                        return null ;
                                       }
                                     else{
                                       return null;
@@ -214,6 +225,11 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     {
                                       return "Please Enter a valid Email";
                                     }
+                                    else if(val.isNotEmpty)
+                                      {
+                                        globals.email = val;
+                                        return null;
+                                      }
                                     else {
                                       return null;
                                     }
@@ -247,6 +263,11 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                         {
                                           return "Please Enter Address";
                                         }
+                                    else if (val.isNotEmpty)
+                                      {
+                                        globals.address = val;
+                                        return null;
+                                      }
                                         else
                                           {
                                             return null;
@@ -254,7 +275,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                   },
                                   controller: addressController,
                                   keyboardType: TextInputType.streetAddress,
-                                  textInputAction: TextInputAction.done,
+                                  textInputAction: TextInputAction.next,
                                   style: const TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
@@ -271,6 +292,43 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     ),
                                     border: OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(30)),
+                                    ),
+                                  ),
+                                ),
+                                20.h,
+                                TextFormField(
+                                  validator: (val)
+                                  {
+                                    if (val!.isEmpty)
+                                    {
+                                      return "Please Enter City";
+                                    }
+                                    else if (val.isNotEmpty) {
+                                      globals.city = val;
+                                      return null ;
+                                    }
+                                    else{
+                                      return null;
+                                    }
+                                  },
+                                  controller: cityController,
+                                  keyboardType: TextInputType.name,
+                                  textInputAction: TextInputAction.done,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    labelText: "City",
+                                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                                    hintText: "Enter City",
+                                    prefixIcon: const Icon(Icons.location_city,
+                                      color: Colors.black,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
                                     ),
                                   ),
                                 ),
@@ -337,7 +395,13 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                   ),),
-                                Text("Password : ${passwordController.text}",
+                                Text("Address : ${addressController.text}",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text("City : ${cityController.text}",
                                   style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
@@ -349,11 +413,25 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                   children: [
                                     ElevatedButton(
                                       onPressed: () {
+                                        bool validated = formKey.currentState!.validate();
                                       nameController.clear();
                                       contactController.clear();
                                       emailController.clear();
                                       // passwordController.clear();
                                       addressController.clear();
+                                      cityController.clear();
+                                        if (validated)
+                                          {
+                                            setState(() {
+                                              globals.name =  nameController.text;
+                                              globals.contact =  contactController.text;
+                                              globals.email =  emailController.text;
+                                              globals.address =  addressController.text;
+                                              globals.city = cityController.text;
+                                            });
+                                          }
+
+
                                       setState(() {});
                                     },
                                         child: const Text("RESEAT",
@@ -374,11 +452,60 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                             color: Colors.black,
                                           ),),
                                     ),
+
                                   ],
                                 ),
                               ],
                             ),
                           ),
+                        ),
+                      ),
+                      Container(
+                        color: Colors.white,
+                        height: 300,
+                        width: 500,
+                        child: Column(
+                          children: [
+                            Text(
+                              "Name: ${globals.name}",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              "contact: ${globals.contact}",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              "Email: ${globals.email}",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              "Address: ${globals.address}",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),
+                            Text(
+                              "City: ${globals.city}",
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
+                            ),                       ],
                         ),
                       ),
                     ],
@@ -391,3 +518,4 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
     );
   }
 }
+
