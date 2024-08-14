@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/services.dart';
 import 'package:resume_app/utils/extension.dart';
 
 class Contact_Info_Page extends StatefulWidget {
@@ -12,6 +12,18 @@ class Contact_Info_Page extends StatefulWidget {
 
 class _Contact_Info_PageState extends State<Contact_Info_Page> {
   int index = 0;
+  bool hide = true;
+
+  String? name , contact , email , password ,address;
+  // Formkey
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController contactController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
 
   void setIndex(int i) {
     setState(() {
@@ -109,106 +121,264 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                 child: Padding(
                   padding: const EdgeInsets.all(18),
                   child: IndexedStack(
+                    index: index,
                     children: [
                       Container(
                         decoration: const BoxDecoration(
                           color: Colors.black,
                           borderRadius: BorderRadius.all(Radius.circular(30))
                         ),
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            20.h,
-                            TextFormField(
-                              keyboardType: TextInputType.name,
-                              textInputAction: TextInputAction.next,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              decoration: InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: "Name",
-                                floatingLabelBehavior: FloatingLabelBehavior.never,
-                                hintText: "Enter name",
-                                prefixIcon: const Icon(Icons.person,
-                                color: Colors.black,
+                        child: SingleChildScrollView(
+                          child: Form(
+                            key: formKey,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                20.h,
+                                TextFormField(
+                                  validator: (val)
+                                  {
+                                    if (val!.isEmpty)
+                                      {
+                                        return "Please Enter Name";
+                                      }
+                                      else{
+                                        return null;
+                                    }
+                                  },
+                                  controller: nameController,
+                                  keyboardType: TextInputType.name,
+                                  textInputAction: TextInputAction.next,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  decoration: InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    labelText: "Name",
+                                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                                    hintText: "Enter name",
+                                    prefixIcon: const Icon(Icons.person,
+                                    color: Colors.black,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                  ),
                                 ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(30),
+                                20.h,
+                                TextFormField(
+                                  validator: (val) {
+                                    if (val!.isEmpty)
+                                      {
+                                        return "Please Enter number ";
+                                      }
+                                    else{
+                                      return null;
+                                    }
+                                  },
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.digitsOnly,
+                                    LengthLimitingTextInputFormatter(10),
+                                  ],
+                                  maxLength: 10,
+                                  controller: contactController,
+                                  keyboardType: TextInputType.number,
+                                  textInputAction: TextInputAction.next,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    prefixIconColor: Colors.black,
+                                    labelText: "Contact",
+                                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                                    hintText: "Enter Number",
+                                    prefixIcon: Icon(Icons.phone_outlined,
+                                    color: Colors.black,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                                    ),
+                                  ),
                                 ),
-                              ),
+                                20.h,
+                                TextFormField(
+                                  validator: (val) {
+                                    if (val!.isEmpty) {
+                                      return "Please Enter Email";
+                                    } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(val))
+                                    {
+                                      return "Please Enter a valid Email";
+                                    }
+                                    else {
+                                      return null;
+                                    }
+                                  },
+                                  controller: emailController,
+                                  keyboardType: TextInputType.emailAddress,
+                                  textInputAction: TextInputAction.next,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    labelText: "Email",
+                                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                                    hintText: "Enter E-mail",
+                                    prefixIcon: Icon(Icons.email_outlined,
+                                      color: Colors.black,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                                    ),
+                                  ),
+                                ),
+                                20.h,
+                                TextFormField(
+                                  validator: (val)
+                                  {
+                                    if (val!.isEmpty)
+                                        {
+                                          return "Please Enter Address";
+                                        }
+                                        else
+                                          {
+                                            return null;
+                                          }
+                                  },
+                                  controller: addressController,
+                                  keyboardType: TextInputType.streetAddress,
+                                  textInputAction: TextInputAction.done,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  decoration: const InputDecoration(
+                                    filled: true,
+                                    fillColor: Colors.white,
+                                    labelText: "Address",
+                                    floatingLabelBehavior: FloatingLabelBehavior.never,
+                                    hintText: "Enter Address",
+                                    prefixIcon: Icon(
+                                      CupertinoIcons.location_solid,
+                                      color: Colors.black,
+                                    ),
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(30)),
+                                    ),
+                                  ),
+                                ),
+                                // 20.h,
+                                // TextFormField(
+                                //   validator: (val) {
+                                //     if(val!.isEmpty)
+                                //       {
+                                //         return "Please Enter Password";
+                                //       }
+                                //     {
+                                //       return null;
+                                //     }
+                                //   },
+                                //   controller: passwordController,
+                                //   keyboardType: TextInputType.visiblePassword,
+                                //   textInputAction: TextInputAction.done,
+                                //   obscureText: hide,
+                                //   style: const TextStyle(
+                                //     color: Colors.black,
+                                //     fontWeight: FontWeight.bold,
+                                //   ),
+                                //   decoration: InputDecoration(
+                                //     filled: true,
+                                //     fillColor: Colors.white,
+                                //     labelText: "Password",
+                                //     floatingLabelBehavior: FloatingLabelBehavior.never,
+                                //     hintText: "Enter Password",
+                                //     prefixIcon: const Icon(
+                                //       CupertinoIcons.padlock_solid,
+                                //       color: Colors.black,
+                                //     ),
+                                //     border: const OutlineInputBorder(
+                                //       borderRadius: BorderRadius.all(Radius.circular(30)),
+                                //     ),
+                                //     suffixIcon: IconButton(
+                                //       onPressed: () {
+                                //         setState(() {
+                                //           hide = !hide;
+                                //         });
+                                //       },
+                                //       icon: Icon(
+                                //         hide
+                                //             ? Icons.visibility
+                                //             : Icons.visibility_off,
+                                //       ),
+                                //     ),
+                                //   ),
+                                // ),
+                                20.h,
+                                Text("Name : ${nameController.text}",
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                                ),
+                                Text("Contact : ${contactController.text}",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),),
+                                Text("email : ${emailController.text}",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),),
+                                Text("Password : ${passwordController.text}",
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                20.h,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {
+                                      nameController.clear();
+                                      contactController.clear();
+                                      emailController.clear();
+                                      // passwordController.clear();
+                                      addressController.clear();
+                                      setState(() {});
+                                    },
+                                        child: const Text("RESEAT",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.black,
+                                        ),
+                                        ),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        bool validated =
+                                        formKey.currentState!.validate();
+                                    },
+                                        child: const Text("SAVE",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.black,
+                                          ),),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
-                            20.h,
-                            TextFormField(
-                              keyboardType: TextInputType.number,
-                              textInputAction: TextInputAction.next,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                prefixIconColor: Colors.black,
-                                labelText: "Contact",
-                                floatingLabelBehavior: FloatingLabelBehavior.never,
-                                hintText: "Enter Number",
-                                prefixIcon: Icon(Icons.phone_outlined,
-                                color: Colors.black,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                                ),
-                              ),
-                            ),
-                            20.h,
-                            TextFormField(
-                              keyboardType: TextInputType.emailAddress,
-                              textInputAction: TextInputAction.next,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: "Email",
-                                floatingLabelBehavior: FloatingLabelBehavior.never,
-                                hintText: "Enter E-mail",
-                                prefixIcon: Icon(Icons.email_outlined,
-                                  color: Colors.black,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                                ),
-                              ),
-                            ),
-                            20.h,
-                            TextFormField(
-                              keyboardType: TextInputType.visiblePassword,
-                              textInputAction: TextInputAction.done,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              decoration: const InputDecoration(
-                                filled: true,
-                                fillColor: Colors.white,
-                                labelText: "Password",
-                                floatingLabelBehavior: FloatingLabelBehavior.never,
-                                hintText: "Enter Password",
-                                prefixIcon: Icon(CupertinoIcons.padlock_solid,
-                                  color: Colors.black,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(Radius.circular(30)),
-                                ),
-                              ),
-                            ),
-                            20.h,
-                          ],
+                          ),
                         ),
                       ),
                     ],
