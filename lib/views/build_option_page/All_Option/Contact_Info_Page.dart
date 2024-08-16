@@ -1,6 +1,9 @@
+import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:resume_app/globals.dart';
 import 'package:resume_app/utils/extension.dart';
 
@@ -13,12 +16,13 @@ class Contact_Info_Page extends StatefulWidget {
 
 class _Contact_Info_PageState extends State<Contact_Info_Page> {
   int index = 0;
-  bool hide = true;
+  // bool hide = true;
 
   String? name , contact , email , password ,address , city;
   // Formkey
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final ImagePicker picker = ImagePicker();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController contactController = TextEditingController();
@@ -27,11 +31,15 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
   TextEditingController addressController = TextEditingController();
   TextEditingController cityController = TextEditingController();
 
+
+
   void setIndex(int i) {
     setState(() {
       index = i;
     });
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -145,7 +153,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                         return "Please Enter Name";
                                       }
                                       else if (val.isNotEmpty) {
-                                        globals.name = val;
+                                      Globals.name = val;
                                         return null ;
                                     }
                                       else{
@@ -182,7 +190,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                       }
                                     else if(val.isNotEmpty)
                                       {
-                                        globals.contact =val;
+                                        Globals.contact =val;
                                         return null ;
                                       }
                                     else{
@@ -227,7 +235,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     }
                                     else if(val.isNotEmpty)
                                       {
-                                        globals.email = val;
+                                        Globals.email = val;
                                         return null;
                                       }
                                     else {
@@ -265,7 +273,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                         }
                                     else if (val.isNotEmpty)
                                       {
-                                        globals.address = val;
+                                        Globals.address = val;
                                         return null;
                                       }
                                         else
@@ -304,7 +312,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                       return "Please Enter City";
                                     }
                                     else if (val.isNotEmpty) {
-                                      globals.city = val;
+                                      Globals.city = val;
                                       return null ;
                                     }
                                     else{
@@ -378,35 +386,35 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                 //     ),
                                 //   ),
                                 // ),
-                                20.h,
-                                Text("Name : ${nameController.text}",
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                                ),
-                                Text("Contact : ${contactController.text}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),),
-                                Text("email : ${emailController.text}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),),
-                                Text("Address : ${addressController.text}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text("City : ${cityController.text}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                // 20.h,
+                                // Text("Name : ${nameController.text}",
+                                // style: const TextStyle(
+                                //   color: Colors.white,
+                                //   fontWeight: FontWeight.bold,
+                                // ),
+                                // ),
+                                // Text("Contact : ${contactController.text}",
+                                //   style: const TextStyle(
+                                //     color: Colors.white,
+                                //     fontWeight: FontWeight.bold,
+                                //   ),),
+                                // Text("email : ${emailController.text}",
+                                //   style: const TextStyle(
+                                //     color: Colors.white,
+                                //     fontWeight: FontWeight.bold,
+                                //   ),),
+                                // Text("Address : ${addressController.text}",
+                                //   style: const TextStyle(
+                                //     color: Colors.white,
+                                //     fontWeight: FontWeight.bold,
+                                //   ),
+                                // ),
+                                // Text("City : ${cityController.text}",
+                                //   style: const TextStyle(
+                                //     color: Colors.white,
+                                //     fontWeight: FontWeight.bold,
+                                //   ),
+                                // ),
                                 20.h,
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -423,11 +431,11 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                         if (validated)
                                           {
                                             setState(() {
-                                              globals.name =  nameController.text;
-                                              globals.contact =  contactController.text;
-                                              globals.email =  emailController.text;
-                                              globals.address =  addressController.text;
-                                              globals.city = cityController.text;
+                                              Globals.name =  nameController.text;
+                                              Globals.contact =  contactController.text;
+                                              Globals.email =  emailController.text;
+                                              Globals.address =  addressController.text;
+                                              Globals.city = cityController.text;
                                             });
                                           }
 
@@ -461,51 +469,43 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                         ),
                       ),
                       Container(
-                        color: Colors.white,
-                        height: 300,
-                        width: 500,
-                        child: Column(
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                        ),
+                        padding: const EdgeInsets.all(18),
+                        width: double.infinity,
+                        height: MediaQuery.sizeOf(context).height * 0.25,
+                        alignment: Alignment.center,
+                        child:  Stack(
+                          alignment: Alignment.bottomRight,
                           children: [
-                            Text(
-                              "Name: ${globals.name}",
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
+                            CircleAvatar(
+                              radius: 60,
+                              foregroundImage: Globals.image != null
+                                  ? FileImage(Globals.image!)
+                                  : null,
+                              child:  const Text("Add Image"),
                             ),
-                            Text(
-                              "contact: ${globals.contact}",
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
+
+                            FloatingActionButton.small(
+                              onPressed: () async {
+                                ImagePicker image = ImagePicker();
+                                XFile? file = await picker.pickImage(
+                                    source: ImageSource.camera);
+                                if (file != null)
+                                  {
+                                    log("FILE GOT !!");
+                                    Globals.image = File(file.path);
+                                    setState(() {});
+                                  }
+                                else
+                                {
+                                  log("FAILED !!");
+                                }
+                            },
+                              child: const Icon(Icons.camera_alt_outlined),
                             ),
-                            Text(
-                              "Email: ${globals.email}",
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text(
-                              "Address: ${globals.address}",
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),
-                            Text(
-                              "City: ${globals.city}",
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                              ),
-                            ),                       ],
+                          ],
                         ),
                       ),
                     ],
