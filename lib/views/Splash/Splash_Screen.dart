@@ -4,12 +4,10 @@ import 'package:resume_app/routes/app_routes.dart';
 
 class Splash_Page extends StatelessWidget {
   const Splash_Page({super.key});
-
   @override
   Widget build(BuildContext context) {
-
     Future.delayed(
-      const Duration(seconds: 3),
+      const Duration(seconds: 5),
           () {
         Navigator.of(context).pushReplacementNamed(Allroutes.homepage);
       },
@@ -24,9 +22,9 @@ class Splash_Page extends StatelessWidget {
     // );
 
     return const Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Padding(
-        padding: EdgeInsets.all(88),
+        padding: EdgeInsets.all(18),
         child: Center(
           child: kIsWeb
           ? Image(image: NetworkImage('lib/assets/icons/gif/start_screen.gif'),)

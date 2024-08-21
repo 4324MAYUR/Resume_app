@@ -9,7 +9,6 @@ import 'package:resume_app/utils/extension.dart';
 
 class Contact_Info_Page extends StatefulWidget {
   const Contact_Info_Page({super.key});
-
   @override
   State<Contact_Info_Page> createState() => _Contact_Info_PageState();
 }
@@ -17,10 +16,8 @@ class Contact_Info_Page extends StatefulWidget {
 class _Contact_Info_PageState extends State<Contact_Info_Page> {
   int index = 0;
   // bool hide = true;
-
   String? name , contact , email , password ,address , city;
   // Formkey
-
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final ImagePicker picker = ImagePicker();
 
@@ -31,15 +28,11 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
   TextEditingController addressController = TextEditingController();
   TextEditingController cityController = TextEditingController();
 
-
-
   void setIndex(int i) {
     setState(() {
       index = i;
     });
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -170,9 +163,9 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                   decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
-                                    labelText: "Name",
+                                    labelText: Globals.name,
                                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                                    hintText: "Enter name",
+                                    hintText: Globals.name,
                                     prefixIcon: const Icon(Icons.person,
                                     color: Colors.black,
                                     ),
@@ -209,17 +202,17 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  decoration: const InputDecoration(
+                                  decoration:  InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
                                     prefixIconColor: Colors.black,
-                                    labelText: "Contact",
+                                    labelText: Globals.contact,
                                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                                    hintText: "Enter Number",
-                                    prefixIcon: Icon(Icons.phone_outlined,
+                                    hintText:  Globals.contact,
+                                    prefixIcon: const Icon(Icons.phone_outlined,
                                     color: Colors.black,
                                     ),
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(30)),
                                     ),
                                   ),
@@ -249,16 +242,16 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  decoration: const InputDecoration(
+                                  decoration:  InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
-                                    labelText: "Email",
+                                    labelText: Globals.email,
                                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                                    hintText: "Enter E-mail",
-                                    prefixIcon: Icon(Icons.email_outlined,
+                                    hintText: Globals.email,
+                                    prefixIcon: const Icon(Icons.email_outlined,
                                       color: Colors.black,
                                     ),
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(30)),
                                     ),
                                   ),
@@ -272,12 +265,10 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                           return "Please Enter Address";
                                         }
                                     else if (val.isNotEmpty)
-                                      {
-                                        Globals.address = val;
+                                      {Globals.address = val;
                                         return null;
                                       }
-                                        else
-                                          {
+                                    else{
                                             return null;
                                           }
                                   },
@@ -288,17 +279,17 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                  decoration: const InputDecoration(
+                                  decoration:  InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
-                                    labelText: "Address",
+                                    labelText: Globals.address,
                                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                                    hintText: "Enter Address",
-                                    prefixIcon: Icon(
+                                    hintText: Globals.address,
+                                    prefixIcon: const Icon(
                                       CupertinoIcons.location_solid,
                                       color: Colors.black,
                                     ),
-                                    border: OutlineInputBorder(
+                                    border: const OutlineInputBorder(
                                       borderRadius: BorderRadius.all(Radius.circular(30)),
                                     ),
                                   ),
@@ -329,9 +320,9 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                   decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Colors.white,
-                                    labelText: "City",
+                                    labelText: Globals.city,
                                     floatingLabelBehavior: FloatingLabelBehavior.never,
-                                    hintText: "Enter City",
+                                    hintText: Globals.city,
                                     prefixIcon: const Icon(Icons.location_city,
                                       color: Colors.black,
                                     ),
@@ -438,8 +429,6 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                               Globals.city = cityController.text;
                                             });
                                           }
-
-
                                       setState(() {});
                                     },
                                         child: const Text("RESEAT",
@@ -460,7 +449,6 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                             color: Colors.black,
                                           ),),
                                     ),
-
                                   ],
                                 ),
                               ],
@@ -486,7 +474,6 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                   : null,
                               child:  const Text("Add Image"),
                             ),
-
                             FloatingActionButton.small(
                               onPressed: () async {
                                 ImagePicker image = ImagePicker();
@@ -497,8 +484,7 @@ class _Contact_Info_PageState extends State<Contact_Info_Page> {
                                     log("FILE GOT !!");
                                     Globals.image = File(file.path);
                                     setState(() {});
-                                  }
-                                else
+                                  }else
                                 {
                                   log("FAILED !!");
                                 }

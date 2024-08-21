@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:resume_app/globals.dart';
 
 class Declaration_Page extends StatefulWidget {
   const Declaration_Page({super.key});
@@ -30,6 +31,37 @@ class _Declaration_PageState extends State<Declaration_Page> {
               fontWeight: FontWeight.bold,
               fontSize: 22,
             ),
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(18),
+        child: Container(
+          padding: const EdgeInsets.all(18),
+          width: double.infinity,
+          color: Colors.white,
+          child: Column(
+          mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Declaration"),
+                  Switch(
+                      value: Globals.isVisibility,
+                      onChanged: (val)
+                      {
+                        Globals.isVisibility = val;
+                        setState(() {});
+                      }
+                  ),
+                ],
+              ),
+              Visibility(
+                visible: Globals.isVisibility,
+                  child: const Text("Show In Declaration"),
+              ),
+            ],
           ),
         ),
       ),
